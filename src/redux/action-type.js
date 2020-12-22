@@ -1,0 +1,1 @@
+// 包含action type名称常量
