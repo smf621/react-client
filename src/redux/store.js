@@ -1,6 +1,6 @@
 // redux 核心代码模块]
 import {createStore,applyMiddleware} from 'redux'
-import thunk from 'redux-thunk'
+import thunk from 'redux-thunk'  //异步
 import {composeWithDevTools} from 'redux-devtools-extension'
 
 import reducers from './reducers'

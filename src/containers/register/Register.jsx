@@ -9,11 +9,15 @@ import {
     Radio,
     Button
 } from 'antd-mobile'
+import {connect} from 'react-redux'
+
+import {register} from '../../redux/actions'
 import Logo from '../../components/logo/logo'
+
 
 const ListItem = List.Item
 
-export default class Register extends Component {
+ class Register extends Component {
     state = {
         username:'',
         password:'',
@@ -26,7 +30,7 @@ export default class Register extends Component {
       })
     }
     register=()=>{
-        console.log(this.state);
+        this.props.register(this.state)
     }
     toLogin=()=>{
         this.props.history.replace('/login')
@@ -34,12 +38,14 @@ export default class Register extends Component {
 
     render() {
         const {type} = this.state
+        const {msg} = this.props.user
         return (
             <div>
                 <NavBar>shenmingfeng</NavBar>
                 <Logo />
                 <WingBlank>
                     <List>
+                        {msg ? <div className='error-msg'>{msg}</div>:''}
                         <WhiteSpace />
                         <InputItem placeholder='请输入用户名' onChange={val =>{this.handleChange('username',val)}}>用户名：</InputItem>
                         <WhiteSpace />
@@ -64,3 +70,8 @@ export default class Register extends Component {
         )
     }
 }
+
+export default connect(
+    state=>({user:state.user}),
+    {register}
+)(Register)

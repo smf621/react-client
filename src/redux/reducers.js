@@ -2,15 +2,26 @@
 
 import { combineReducers } from 'redux'
 
-function xxx(state = 0, action) {
-    return state
+import {AUTH_SUCCESS,ERROR_MSG} from './action-type'
+
+const initUser = {
+    username:'', // 用户名
+    type:'', //用户类型   dashen/laoban
+    msg:'' //错误信息
 }
-function yyy(state = 0, action) {
-    return state
+function user (state=initUser, action){
+    switch(action.type){
+        case AUTH_SUCCESS: //data是user
+            //后面的值 把前面的值覆盖
+            return {...state,...action.data}
+        case ERROR_MSG:    //data是msg
+            return {...state,msg:action.data}
+        default:
+            return state
+    }
 }
 
-
+//向外暴露的结构   { user:{} }
 export default combineReducers({
-    xxx,
-    yyy
+    user
 })
