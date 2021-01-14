@@ -10,6 +10,7 @@ import {
     Button
 } from 'antd-mobile'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 import {register} from '../../redux/actions'
 import Logo from '../../components/logo/logo'
@@ -38,7 +39,12 @@ const ListItem = List.Item
 
     render() {
         const {type} = this.state
-        const {msg} = this.props.user
+        console.log(this.props.user);
+        const {msg,redirectTo} = this.props.user
+        //redirectTo有值  重定向到 指定路由
+        if(redirectTo){
+            return (<Redirect to={redirectTo}/>)
+        }
         return (
             <div>
                 <NavBar>shenmingfeng</NavBar>
